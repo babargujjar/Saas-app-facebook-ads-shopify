@@ -1,9 +1,8 @@
-import './App.css';
+import "./App.css";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
-import Login from './pages/Login';
-import Home from './pages/Home';
-import Table from './components/Table';
-
+import Login from "./pages/Login";
+import FacebookLogin from "./pages/FacebookLogin";
+import ShopifyLogin from "./pages/ShopifyLogin";
 
 function App() {
   return (
@@ -11,8 +10,8 @@ function App() {
       <div className="h-full w-full">
         <Routes>
           <Route path="/login" element={<Login />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/table" element={<Table />} />
+          <Route path="/facebook-login" element={<FacebookLogin />} />
+          <Route path="/shopify-login" element={<ShopifyLogin />} />
         </Routes>
       </div>
     </BrowserRouter>
