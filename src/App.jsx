@@ -4,12 +4,16 @@ import Login from "./pages/Login";
 import FacebookLogin from "./pages/FacebookLogin";
 import ShopifyLogin from "./pages/ShopifyLogin";
 
+import FacebookCallback from "./pages/FacebookCallback";
+
 function App() {
   return (
     <BrowserRouter>
       <div className="h-full w-full">
         <Routes>
           <Route path="/login" element={<Login />} />
+          <Route path="/callback" element={<FacebookCallback />} />
+
           <Route path="/facebook-login" element={<FacebookLogin />} />
           <Route path="/shopify-login" element={<ShopifyLogin />} />
         </Routes>
