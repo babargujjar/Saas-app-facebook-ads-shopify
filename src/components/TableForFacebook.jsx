@@ -1,7 +1,7 @@
-import React, { useRef, useState, useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Switch } from "antd";
 
-const TableForFacebook = ({ access_token, account_id }) => {
+const TableForFacebook = () => {
   const allColumns = [
     "Action",
     "Campaign Name",
@@ -31,77 +31,288 @@ const TableForFacebook = ({ access_token, account_id }) => {
   const [columnWidths, setColumnWidths] = useState(
     allColumns.reduce((acc, name) => ({ ...acc, [name]: 150 }), {})
   );
-  const [searchTerm, setSearchTerm] = useState("");
-  const [data, setData] = useState([]); // Store campaign data here
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [isEditing, setIsEditing] = useState(false);
-  const [editedValue, setEditedValue] = useState("");
-  const [editingRowIndex, setEditingRowIndex] = useState(null);
 
+  const [searchTerm, setSearchTerm] = useState("");
+  const [data, setData] = useState([
+    {
+      Budget: "150",
+      Action: true,
+      "Campaign Name": "Campaign f",
+      Delivery: "On time",
+      "Ad Set Name": "Ad Set A",
+      Results: "500",
+      Reach: "1000",
+      "Amount Spent": "50",
+      "Cost per Result": "0.1",
+      "Purchases Conversion Value": "200",
+      "Date Last Edited": "2023-09-01",
+      "Ad ID": "AD123",
+      "Purchase ROAS": "2.5",
+      "Website Purchase ROAS": "3.0",
+      Frequency: "1.5",
+      "CPC(all)": "0.2",
+      Impressions: "1500",
+      "Unique In-app content views": "300",
+      "CPM(cost per 1,000 impression)": "15",
+      "Unique CTR(link click through rate)": "1.2%",
+      "Quality ranking": "Above average",
+      "Engagement rate ranking": "High",
+    },
+    {
+      Budget: "100",
+      Action: true,
+      "Campaign Name": "Campaign 1",
+      Delivery: "On time",
+      "Ad Set Name": "Ad Set A",
+      Results: "500",
+      Reach: "1000",
+      "Amount Spent": "50",
+      "Cost per Result": "0.1",
+      "Purchases Conversion Value": "200",
+      "Date Last Edited": "2023-09-01",
+      "Ad ID": "AD123",
+      "Purchase ROAS": "2.5",
+      "Website Purchase ROAS": "3.0",
+      Frequency: "1.5",
+      "CPC(all)": "0.2",
+      Impressions: "1500",
+      "Unique In-app content views": "300",
+      "CPM(cost per 1,000 impression)": "15",
+      "Unique CTR(link click through rate)": "1.2%",
+      "Quality ranking": "Above average",
+      "Engagement rate ranking": "High",
+    },
+    {
+      Budget: "100",
+      Action: true,
+      "Campaign Name": "Campaign 1",
+      Delivery: "On time",
+      "Ad Set Name": "Ad Set A",
+      Results: "500",
+      Reach: "1000",
+      "Amount Spent": "50",
+      "Cost per Result": "0.1",
+      "Purchases Conversion Value": "200",
+      "Date Last Edited": "2023-09-01",
+      "Ad ID": "AD123",
+      "Purchase ROAS": "2.5",
+      "Website Purchase ROAS": "3.0",
+      Frequency: "1.5",
+      "CPC(all)": "0.2",
+      Impressions: "1500",
+      "Unique In-app content views": "300",
+      "CPM(cost per 1,000 impression)": "15",
+      "Unique CTR(link click through rate)": "1.2%",
+      "Quality ranking": "Above average",
+      "Engagement rate ranking": "High",
+    },
+    {
+      Budget: "100",
+      Action: true,
+      "Campaign Name": "Campaign 1",
+      Delivery: "On time",
+      "Ad Set Name": "Ad Set A",
+      Results: "500",
+      Reach: "1000",
+      "Amount Spent": "50",
+      "Cost per Result": "0.1",
+      "Purchases Conversion Value": "200",
+      "Date Last Edited": "2023-09-01",
+      "Ad ID": "AD123",
+      "Purchase ROAS": "2.5",
+      "Website Purchase ROAS": "3.0",
+      Frequency: "1.5",
+      "CPC(all)": "0.2",
+      Impressions: "1500",
+      "Unique In-app content views": "300",
+      "CPM(cost per 1,000 impression)": "15",
+      "Unique CTR(link click through rate)": "1.2%",
+      "Quality ranking": "Above average",
+      "Engagement rate ranking": "High",
+    },
+    {
+      Budget: "100",
+      Action: true,
+      "Campaign Name": "Campaign 1",
+      Delivery: "On time",
+      "Ad Set Name": "Ad Set A",
+      Results: "500",
+      Reach: "1000",
+      "Amount Spent": "50",
+      "Cost per Result": "0.1",
+      "Purchases Conversion Value": "200",
+      "Date Last Edited": "2023-09-01",
+      "Ad ID": "AD123",
+      "Purchase ROAS": "2.5",
+      "Website Purchase ROAS": "3.0",
+      Frequency: "1.5",
+      "CPC(all)": "0.2",
+      Impressions: "1500",
+      "Unique In-app content views": "300",
+      "CPM(cost per 1,000 impression)": "15",
+      "Unique CTR(link click through rate)": "1.2%",
+      "Quality ranking": "Above average",
+      "Engagement rate ranking": "High",
+    },
+    {
+      Budget: "100",
+      Action: true,
+      "Campaign Name": "Campaign 1",
+      Delivery: "On time",
+      "Ad Set Name": "Ad Set A",
+      Results: "500",
+      Reach: "1000",
+      "Amount Spent": "50",
+      "Cost per Result": "0.1",
+      "Purchases Conversion Value": "200",
+      "Date Last Edited": "2023-09-01",
+      "Ad ID": "AD123",
+      "Purchase ROAS": "2.5",
+      "Website Purchase ROAS": "3.0",
+      Frequency: "1.5",
+      "CPC(all)": "0.2",
+      Impressions: "1500",
+      "Unique In-app content views": "300",
+      "CPM(cost per 1,000 impression)": "15",
+      "Unique CTR(link click through rate)": "1.2%",
+      "Quality ranking": "Above average",
+      "Engagement rate ranking": "High",
+    },
+    {
+      Budget: "100",
+      Action: true,
+      "Campaign Name": "Campaign 1",
+      Delivery: "On time",
+      "Ad Set Name": "Ad Set A",
+      Results: "500",
+      Reach: "1000",
+      "Amount Spent": "50",
+      "Cost per Result": "0.1",
+      "Purchases Conversion Value": "200",
+      "Date Last Edited": "2023-09-01",
+      "Ad ID": "AD123",
+      "Purchase ROAS": "2.5",
+      "Website Purchase ROAS": "3.0",
+      Frequency: "1.5",
+      "CPC(all)": "0.2",
+      Impressions: "1500",
+      "Unique In-app content views": "300",
+      "CPM(cost per 1,000 impression)": "15",
+      "Unique CTR(link click through rate)": "1.2%",
+      "Quality ranking": "Above average",
+      "Engagement rate ranking": "High",
+    },
+    {
+      Budget: "100",
+      Action: true,
+      "Campaign Name": "Campaign 1",
+      Delivery: "On time",
+      "Ad Set Name": "Ad Set A",
+      Results: "500",
+      Reach: "1000",
+      "Amount Spent": "50",
+      "Cost per Result": "0.1",
+      "Purchases Conversion Value": "200",
+      "Date Last Edited": "2023-09-01",
+      "Ad ID": "AD123",
+      "Purchase ROAS": "2.5",
+      "Website Purchase ROAS": "3.0",
+      Frequency: "1.5",
+      "CPC(all)": "0.2",
+      Impressions: "1500",
+      "Unique In-app content views": "300",
+      "CPM(cost per 1,000 impression)": "15",
+      "Unique CTR(link click through rate)": "1.2%",
+      "Quality ranking": "Above average",
+      "Engagement rate ranking": "High",
+    },
+    {
+      Budget: "100",
+      Action: true,
+      "Campaign Name": "Campaign 1",
+      Delivery: "On time",
+      "Ad Set Name": "Ad Set A",
+      Results: "500",
+      Reach: "1000",
+      "Amount Spent": "50",
+      "Cost per Result": "0.1",
+      "Purchases Conversion Value": "200",
+      "Date Last Edited": "2023-09-01",
+      "Ad ID": "AD123",
+      "Purchase ROAS": "2.5",
+      "Website Purchase ROAS": "3.0",
+      Frequency: "1.5",
+      "CPC(all)": "0.2",
+      Impressions: "1500",
+      "Unique In-app content views": "300",
+      "CPM(cost per 1,000 impression)": "15",
+      "Unique CTR(link click through rate)": "1.2%",
+      "Quality ranking": "Above average",
+      "Engagement rate ranking": "High",
+    },
+    {
+      Budget: "100",
+      Action: true,
+      "Campaign Name": "Campaign 1",
+      Delivery: "On time",
+      "Ad Set Name": "Ad Set A",
+      Results: "500",
+      Reach: "1000",
+      "Amount Spent": "50",
+      "Cost per Result": "0.1",
+      "Purchases Conversion Value": "200",
+      "Date Last Edited": "2023-09-01",
+      "Ad ID": "AD123",
+      "Purchase ROAS": "2.5",
+      "Website Purchase ROAS": "3.0",
+      Frequency: "1.5",
+      "CPC(all)": "0.2",
+      Impressions: "1500",
+      "Unique In-app content views": "300",
+      "CPM(cost per 1,000 impression)": "15",
+      "Unique CTR(link click through rate)": "1.2%",
+      "Quality ranking": "Above average",
+      "Engagement rate ranking": "High",
+    },
+    {
+      Budget: "100",
+      Action: true,
+      "Campaign Name": "Campaign 1",
+      Delivery: "On time",
+      "Ad Set Name": "Ad Set A",
+      Results: "500",
+      Reach: "1000",
+      "Amount Spent": "50",
+      "Cost per Result": "0.1",
+      "Purchases Conversion Value": "200",
+      "Date Last Edited": "2023-09-01",
+      "Ad ID": "AD123",
+      "Purchase ROAS": "2.5",
+      "Website Purchase ROAS": "3.0",
+      Frequency: "1.5",
+      "CPC(all)": "0.2",
+      Impressions: "1500",
+      "Unique In-app content views": "300",
+      "CPM(cost per 1,000 impression)": "15",
+      "Unique CTR(link click through rate)": "1.2%",
+      "Quality ranking": "Above average",
+      "Engagement rate ranking": "High",
+    },
+  ]);
+
+  const filteredData = data.filter((row) =>
+    columnNames.some((column) =>
+      row[column]?.toString().toLowerCase().includes(searchTerm.toLowerCase())
+    )
+  );
+
+    const [isEditing, setIsEditing] = useState(false);
+    const [editedValue, setEditedValue] = useState("");
+    const [editingRowIndex, setEditingRowIndex] = useState(null);
   const isResizing = useRef(null);
   const dropdownRef = useRef(null);
   const plusIconRef = useRef(null);
   const [showDropdown, setShowDropdown] = useState(false);
-
-  useEffect(() => {
-    const fetchCampaigns = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch(
-          `http://127.0.0.1:8000/facebook/adaccounts/${account_id}/campaigns/`,
-          {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${access_token}`,
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        if (!response.ok) {
-          throw new Error("Failed to fetch campaigns");
-        }
-
-        const result = await response.json();
-
-        // Format and set the fetched data
-        const formattedData = result.data.map((item) => ({
-          Action: "Enable/Disable",
-          "Campaign Name": item.name || "-",
-          Budget: item.daily_budget || "-",
-          Delivery: item.status || "-",
-          "Ad Set Name": item.ad_set_name || "-",
-          Results: item.results || "-",
-          Reach: item.reach || "-",
-          "Amount Spent": item.amount_spent || "-",
-          "Cost per Result": item.cost_per_result || "-",
-          "Purchases Conversion Value": item.purchases_conversion_value || "-",
-          "Date Last Edited": item.updated_time || "-",
-          "Ad ID": item.id || "-",
-          "Purchase ROAS": item.purchase_roas || "-",
-          "Website Purchase ROAS": item.website_purchase_roas || "-",
-          Frequency: item.frequency || "-",
-          "CPC(all)": item.cpc || "-",
-          Impressions: item.impressions || "-",
-          "Unique In-app content views": item.unique_views || "-",
-          "CPM(cost per 1,000 impression)": item.cpm || "-",
-          "Unique CTR(link click through rate)": item.ctr || "-",
-          "Quality ranking": item.quality_ranking || "-",
-          "Engagement rate ranking": item.engagement_ranking || "-",
-        }));
-
-        setData(formattedData);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (account_id && access_token) {
-      fetchCampaigns();
-    }
-  }, [account_id, access_token]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -176,25 +387,6 @@ const TableForFacebook = ({ access_token, account_id }) => {
     setEditedValue("");
   };
 
-  const filteredData = data.filter((row) =>
-    columnNames.some((column) =>
-      row[column]?.toString().toLowerCase().includes(searchTerm.toLowerCase())
-    )
-  );
-  const totals = columnNames.reduce((acc, columnName) => {
-    if (["Budget", "Amount Spent"].includes(columnName)) {
-      acc[columnName] = filteredData.reduce((sum, row) => {
-        const value = parseFloat(row[columnName]);
-        return !isNaN(value) ? sum + value : sum;  // Only add valid numbers
-      }, 0);
-    } else {
-      acc[columnName] = "-"; // Other columns will have "-"
-    }
-    return acc;
-  }, {});
-  
-
-
   return (
     <div
       onMouseMove={handleMouseMove}
@@ -213,37 +405,25 @@ const TableForFacebook = ({ access_token, account_id }) => {
         </div>
 
         {/* Suggested Columns Dropdown */}
-{/* Suggested Columns Dropdown */}
-{/* Suggested Columns Dropdown */}
-{/* Suggested Columns Dropdown */}
-{showDropdown && (
-  <div
-    ref={dropdownRef}
-    className="absolute top-[90px] right-5 mb-3 mt-1 w-48 bg-white border rounded-md shadow-lg z-40"
-    style={{ maxHeight: "200px", overflowY: "auto" }} // Add max-height and overflow for scrolling
-  >
-    <div className="p-2 font-semibold border-b">Suggested Columns</div>
-    {allColumns
-      .filter((col) => !columnNames.includes(col))
-      .map((col) => (
-        <div key={col} className="p-2 hover:bg-gray-100 cursor-pointer">
-          <label className="flex items-center">
-            <input
-              type="checkbox"
-              className="mr-2"
-              onChange={(e) => {
-                if (e.target.checked) {
-                  handleAddColumn(col); // Add the column when checked
-                }
-              }}
-            />
-            {col}
-          </label>
-        </div>
-      ))}
-  </div>
-)}
-
+        {showDropdown && (
+          <div
+            ref={dropdownRef}
+            className="absolute top-[90px] right-5 mb-3 mt-1 w-48 bg-white border rounded-md shadow-lg z-40"
+          >
+            <div className="p-2 font-semibold border-b">Suggested Columns</div>
+            {allColumns
+              .filter((col) => !columnNames.includes(col))
+              .map((col) => (
+                <div
+                  key={col}
+                  className="p-2 hover:bg-gray-100 cursor-pointer"
+                  onClick={() => handleAddColumn(col)}
+                >
+                  {col}
+                </div>
+              ))}
+          </div>
+        )}
 
         <div className="border-b overflow-auto max-h-[400px] rounded-t-md">
           <div className="min-w-max relative">
@@ -305,24 +485,41 @@ const TableForFacebook = ({ access_token, account_id }) => {
                       }}
                       className="border-r p-1 bg-white"
                     >
-                      {isEditing && editingRowIndex === i && name === "Budget" ? (
-                        <div>
+                      {name === "Action" ? (
+                        <div className="flex items-center justify-center">
+                          <Switch defaultChecked={true} />
+                        </div>
+                      ) : name === "Campaign Name" ? (
+                        <div
+                          style={{
+                            maxWidth: `${0.8 * columnWidths[name]}px`,
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            whiteSpace: "nowrap",
+                          }}
+                        >
+                          {row[name] || "N/A"}
+                        </div>
+                      ) : name === "Budget" &&
+                        isEditing &&
+                        editingRowIndex === i ? (
+                        <div className="flex flex-col">
                           <input
-                            type="text"
+                            type="number"
                             value={editedValue}
                             onChange={(e) => setEditedValue(e.target.value)}
-                            className="border p-1 w-full"
+                            className="w-full p-1 border mb-2"
                           />
-                          <div className="flex justify-end mt-1">
+                          <div className="flex justify-between">
                             <button
                               onClick={handleSave}
-                              className="text-sm px-2 py-1 mr-1 text-white bg-green-500 rounded"
+                              className="bg-blue-500 text-white p-1 rounded"
                             >
                               Save
                             </button>
                             <button
                               onClick={handleCancel}
-                              className="text-sm px-2 py-1 text-white bg-red-500 rounded"
+                              className="bg-red-500 text-white p-1 rounded"
                             >
                               Cancel
                             </button>
@@ -330,14 +527,10 @@ const TableForFacebook = ({ access_token, account_id }) => {
                         </div>
                       ) : name === "Budget" ? (
                         <div
-                          onClick={() => handleEditClick(row[name], i)}
                           className="cursor-pointer"
+                          onClick={() => handleEditClick(row[name], i)}
                         >
-                          {row[name]}
-                        </div>
-                      ) : name === "Action" ? (
-                        <div className="flex items-center justify-center">
-                          <Switch defaultChecked={true} />
+                          {row[name] || "N/A"}
                         </div>
                       ) : (
                         <div
@@ -354,13 +547,16 @@ const TableForFacebook = ({ access_token, account_id }) => {
                     </div>
                   ))}
                   <div
-                    style={{ width: 50, minWidth: 30 }}
+                    style={{
+                      width: 50,
+                      minWidth: 30,
+                    }}
                     className="border-r p-1 bg-white"
                   />
                 </div>
               ))}
-               {/* Total Row */}
-               <div className="flex font-bold bg-gray-100">
+
+              <div className="flex border-t sticky bottom-0 bg-white z-20">
                 {columnNames.map((name, index) => (
                   <div
                     key={name}
@@ -371,18 +567,19 @@ const TableForFacebook = ({ access_token, account_id }) => {
                       left: index < 2 ? `${getStickyOffset(index)}px` : "unset",
                       zIndex: index < 2 ? 1 : "unset",
                     }}
-                    className="border-r p-1 bg-gray-100"
+                    className="border-r p-1 bg-white font-bold"
                   >
-                    {totals[name]}
+                    {["Budget", "Results", "Reach", "Amount Spent"].includes(
+                      name
+                    ) && <div>Total</div>}
                   </div>
                 ))}
                 <div
                   style={{ width: 50, minWidth: 30 }}
-                  className="border-r p-1 bg-gray-100"
+                  className="border-r p-1 bg-white"
                 />
               </div>
             </div>
-
           </div>
         </div>
       </div>

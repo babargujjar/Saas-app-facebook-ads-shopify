@@ -1,10 +1,9 @@
 import "./App.css";
 import { Route, Routes, BrowserRouter } from "react-router-dom";
 import Login from "./pages/Login";
-import FacebookLogin from "./pages/FacebookLogin";
-import ShopifyLogin from "./pages/ShopifyLogin";
 
 import FacebookCallback from "./pages/FacebookCallback";
+import Home from "./pages/Home";
 
 function App() {
   return (
@@ -14,8 +13,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/callback" element={<FacebookCallback />} />
 
-          <Route path="/facebook-login" element={<FacebookLogin />} />
-          <Route path="/shopify-login" element={<ShopifyLogin />} />
+          <Route path="/" element={<Home />} />
         </Routes>
       </div>
     </BrowserRouter>
